@@ -1,23 +1,33 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    entry: './src/example/index.js',
+    entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, 'lib'),
+        filename: 'react-highcharts.js',
+        libraryTarget: 'commonjs'
+    },
+    externals: {
+        'react': 'React',
+        'highcharts': 'Highcharts',
+        'react-dom': 'ReactDOM'
+    },
+    resolve:{
+        extensions: ['', '.js', '.jsx'],
+        alias:{
+            'react': 'React'
+        }
     },
     module: {
-        loaders: {
+        noparse: ['react', 'highcharts'],
+        loaders: [{
             test: /.jsx?$/,
             loader: 'babel',
             exclude: /node_modules/,
             query: {
                 presets: ['es2015', 'react']
             }
-        }
+        }]
     },
-    plugins:[
-        new HtmlWebpackPlugin()
-    ]
+    plugins: []
 };

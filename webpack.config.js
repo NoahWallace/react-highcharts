@@ -1,33 +1,45 @@
+const cleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
-        path: path.resolve(__dirname, 'lib'),
+        path: 'dist',
         filename: 'react-highcharts.js',
         libraryTarget: 'commonjs'
     },
+    exclude: /node_modules/,
     externals: {
-        'react': 'React',
+        'react': {
+            amd: 'react',
+            commonjs: 'react',
+            commonjs2: 'react',
+            root: 'React'
+        },
+        'react-dom': {
+            amd: 'react-dom',
+            commonjs: 'react-dom',
+            commonjs2: 'react-dom',
+            root: 'ReactDOM'
+        },
         'highcharts': 'Highcharts',
-        'react-dom': 'ReactDOM'
+
     },
-    resolve:{
-        extensions: ['', '.js', '.jsx'],
-        alias:{
+    resolve: {
+        extensions: ['', '.js', '.jsx', '.tsx', '.ts'],
+        alias: {
             'react': 'React'
         }
     },
     module: {
         noparse: ['react', 'highcharts'],
         loaders: [{
-            test: /.jsx?$/,
+            test: /.tsx?$/,
             loader: 'babel',
-            exclude: /node_modules/,
-            query: {
-                presets: ['es2015', 'react']
-            }
+
         }]
     },
-    plugins: []
+    plugins: [
+        new cleanWebpackPlugin(['dist'])
+    ]
 };

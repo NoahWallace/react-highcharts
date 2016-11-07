@@ -5,11 +5,14 @@ export interface IHighChartsInit{
 }
 
 export const HInit:IHighChartsInit = (id:string,config:Highcharts.Options) => {
-    return Highcharts.chart(id, config, (chart)=> {
-            let redraw=chart.redraw;
-            chart.redraw = () => {
-                redraw.apply(chart,null);
-                console.log("redraw")
-            }
+    const wrapRedraw = (chart:Highcharts.ChartObject) => {
+        let redraw = chart.redraw;
+        chart.redraw = () => {
+            redraw.apply(chart,null);
+            console.log('redraw')
+        }
+    }
+    return Highcharts.chart(id, config, (chart:Highcharts.ChartObject)=> {
+            wrapRedraw(chart);
     });
-}
+};

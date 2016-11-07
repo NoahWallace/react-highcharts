@@ -5,6 +5,8 @@ let gutil = require('gulp-util');
 let ts = require('gulp-typescript');
 let rename = require('gulp-rename');
 let replace = require('gulp-replace');
+let bundle = require('gulp-file-bundle');
+let sequence = require('run-sequence')
 
 let tsProject = ts.createProject('tsconfig.json', {
     typescript: require('typescript')
@@ -13,7 +15,7 @@ let tsProject = ts.createProject('tsconfig.json', {
 gulp.task('clean-lib', function () {
     del(['lib']);
 });
-gulp.task('lib', function () {
+gulp.task('lib', ['clean-lib'], function () {
     let tsResult = gulp.src('./src/**/*.{ts,tsx,js}', {base: 'src'})
         .pipe(tsProject())
         .on('error', function () {
@@ -22,10 +24,15 @@ gulp.task('lib', function () {
             this.emit('end');
         });
     return ([
-        tsResult.dts.pipe(gulp.dest('lib')),
+
         tsResult.js.pipe(rename(function (path) {
             path.dirname = path.dirname.replace(/^src\/?/, '');
-        })).pipe(gulp.dest('lib'))
+        })).pipe(gulp.dest('lib')),
+    tsResult.dts.pipe(gulp.dest('lib'))
+
     ])
 });
-gulp.task('default', ['clean-lib', 'lib'])
+
+gulp.task('default',['clean-lib', 'lib'])
+
+

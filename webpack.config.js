@@ -1,4 +1,5 @@
 const cleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -10,18 +11,8 @@ module.exports = {
     },
     exclude: /node_modules/,
     externals: {
-        'react': {
-            amd: 'react',
-            commonjs: 'react',
-            commonjs2: 'react',
-            root: 'React'
-        },
-        'react-dom': {
-            amd: 'react-dom',
-            commonjs: 'react-dom',
-            commonjs2: 'react-dom',
-            root: 'ReactDOM'
-        },
+        'react': 'React',
+        'react-dom': 'ReactDOM',
         'highcharts': 'Highcharts',
 
     },
@@ -34,9 +25,13 @@ module.exports = {
     module: {
         noparse: ['react', 'highcharts'],
         loaders: [{
-            test: /.tsx?$/,
-            loader: 'babel',
+            test: /\.ts(x?)$/,
+            loaders: ['babel-loader','ts-loader'],
 
+        }],
+        preLoaders:[{
+            test: /\.jsx?$/,
+            loader:'source-map'
         }]
     },
     plugins: [

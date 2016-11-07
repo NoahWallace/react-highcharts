@@ -78,7 +78,7 @@
 	    _createClass(Chart, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            utils_1.HInit(this.props.id, this.props.config);
+	            utils_1.HInit(this.props.id, this.props.config, this.props.callbacks);
 	        }
 	    }, {
 	        key: 'render',
@@ -114,7 +114,8 @@
 	"use strict";
 
 	var Highcharts = __webpack_require__(5);
-	exports.HInit = function (id, config) {
+	exports.HInit = function (id, config, callbacks) {
+	    var callbackArr = [];
 	    var wrapRedraw = function wrapRedraw(chart) {
 	        var redraw = chart.redraw;
 	        chart.redraw = function () {
@@ -122,8 +123,17 @@
 	            console.log('redraw');
 	        };
 	    };
+	    if (callbacks) {
+	        callbacks.map(function (f) {
+	            callbackArr.push(f);
+	        });
+	    }
 	    return Highcharts.chart(id, config, function (chart) {
 	        wrapRedraw(chart);
+	        for (var i = 0; i < callbackArr.length; i++) {
+	            var cb = callbackArr[i];
+	            cb(chart);
+	        }
 	    });
 	};
 

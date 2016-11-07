@@ -6,7 +6,7 @@ import {ICharts} from './Types';
 export class Chart extends React.Component<ICharts.IChartProps,ICharts.IChartState> {
 
     componentDidMount() {
-        HInit(this.props.id, this.props.config);
+        HInit(this.props.id, this.props.config, this.props.callbacks );
     }
 
     render(): JSX.Element {

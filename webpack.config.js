@@ -6,7 +6,7 @@ module.exports = {
     entry: './src/index.ts',
     output: {
         path: 'dist',
-        filename: 'react-highcharts.js',
+        filename: 'react-highcharts-ts.js',
         libraryTarget: 'commonjs'
     },
     exclude: /node_modules/,

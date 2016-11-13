@@ -1,6 +1,6 @@
 {
   "name": "react-highcharts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Library used for implementing highcharts",
   "main": "./lib/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NoahWsallace/react-highcharts.git"
+    "url": "git+https://github.com/NoahWallace/react-highcharts.git"
   },
   "keywords": [
     "react",

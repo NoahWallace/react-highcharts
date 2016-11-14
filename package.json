@@ -1,6 +1,6 @@
 {
   "name": "react-highcharts-ts",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React Library used for implementing highcharts",
   "main": "./lib/index",
   "scripts": {
@@ -57,6 +57,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "deep-extend": "^0.4.1",
     "highcharts": "^5.0.2",
     "react": "^15.3.2"
   }

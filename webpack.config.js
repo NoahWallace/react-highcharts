@@ -18,9 +18,6 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.tsx', '.ts'],
-        alias: {
-            'react': 'React'
-        }
     },
     module: {
         noparse: ['react', 'highcharts'],

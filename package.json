@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/NoahWallace/react-highcharts#readme",
   "devDependencies": {
+    "@types/deep-extend": "^0.4.30",
     "@types/highcharts": "^4.2.39",
     "@types/node": "^6.0.46",
     "@types/react": "^0.14.44",

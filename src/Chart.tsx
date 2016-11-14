@@ -1,12 +1,18 @@
 import * as React from 'react';
 import {HInit} from './utils';
 import {ICharts} from './Types';
+import * as deepExtend from 'deep-extend'
 
 
 export class Chart extends React.Component<ICharts.IChartProps,ICharts.IChartState> {
-
+    state = {
+        chart:{
+            type: 'line',
+        }
+    };
     componentDidMount() {
-        HInit(this.props.id, this.props.config, this.props.callbacks );
+        let config = deepExtend(this.state,this.props.config);
+        HInit(this.props.id, config, this.props.callbacks );
     }
 
     render(): JSX.Element {
